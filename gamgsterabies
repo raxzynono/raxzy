@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel Pterodactyl Store</title>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+    #video-background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: -1;
+    }
+    header {
+      text-align: center;
+      padding: 40px 10px 20px;
+      animation: fadeIn 1.5s ease-out;
+    }
+    h1 {
+      font-size: 2.2em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+    .product-list {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .product {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 15px;
+      animation: slideUp 1s ease-out;
+    }
+    .product h2 {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+    select, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    select {
+      background-color: #333;
+      color: white;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+    @keyframes slideUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6em; }
+    }
+  </style>
+</head>
+<body>
+  <video id="video-background" autoplay muted loop>
+    <source src="https://files.catbox.moe/ebsph1.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
+
+  <header>
+    <h1><i class="fas fa-store"></i> Raxzy Official Market</h1>
+  </header>
+
+  <section class="product-list">
+
+    <div class="product">
+      <h2><i class="fas fa-server"></i> Panel Pterodactyl</h2>
+      <label><i class="fas fa-memory"></i> Pilih RAM:</label>
+      <select id="ram-select">
+        <option value="1 GB">1 GB</option>
+        <option value="2 GB">2 GB</option>
+        <option value="3 GB">3 GB</option>
+        <option value="4 GB">4 GB</option>
+        <option value="5 GB">5 GB</option>
+        <option value="6 GB">6 GB</option>
+        <option value="7 GB">7 GB</option>
+        <option value="8 GB">8 GB</option>
+        <option value="9 GB">9 GB</option>
+        <option value="Unlimited">Unlimited</option>
+      </select>
+      <button onclick="checkout('Panel Pterodactyl')"><i class="fas fa-shopping-cart"></i> Beli</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-user-shield"></i> Admin Panel</h2>
+      <p>Harga: 20K</p>
+      <button onclick="checkoutAdminPanel()"><i class="fas fa-shopping-cart"></i> Beli</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-users-cog"></i> Reseller Panel</h2>
+      <p>Harga: 15K</p>
+      <button onclick="checkoutResellerPanel()"><i class="fas fa-shopping-cart"></i> Beli</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-globe-asia"></i> Nokos</h2>
+      <label><i class="fas fa-flag"></i> Pilih Negara:</label>
+      <select id="country-select" onchange="updatePhoneNumbers()">
+        <option value="filipina">Filipina</option>
+        <option value="indonesia">Indonesia</option>
+        <option value="jepang">Jepang</option>
+        <option value="amerika">Amerika</option>
+        <option value="poland">Poland</option>
+        <option value="brazil">Brazil</option>
+      </select>
+      <label><i class="fas fa-phone-alt"></i> Pilih Nomor:</label>
+      <select id="phone-select"></select>
+      <button onclick="checkoutNokos()"><i class="fas fa-shopping-cart"></i> Beli Nokos</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fab fa-whatsapp"></i> Bot WhatsApp Jaga Grup</h2>
+      <label><i class="fas fa-clock"></i> Durasi Sewa:</label>
+      <select id="bot-duration">
+        <option value="1 Minggu">1 Minggu - 5.000</option>
+        <option value="1 Bulan">1 Bulan - 10.000</option>
+        <option value="1 Tahun">1 Tahun - 40.000</option>
+        <option value="Permanen">Permanen - 60.000</option>
+      </select>
+      <button onclick="checkoutBot()"><i class="fas fa-shopping-cart"></i> Sewa Bot</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fab fa-instagram"></i> Followers Instagram Permanen</h2>
+      <button onclick="sendWA('Beli 100 Followers IG - Rp4.000')">100 Followers - Rp4.000</button>
+      <button onclick="sendWA('Beli 1.000 Followers IG - Rp20.000')">1.000 Followers - Rp20.000</button>
+      <button onclick="sendWA('Beli 2.000 Followers IG - Rp35.000')">2.000 Followers - Rp35.000</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fab fa-tiktok"></i> Followers TikTok Permanen</h2>
+      <button onclick="sendWA('Beli 100 Followers TikTok - Rp4.000')">100 Followers - Rp4.000</button>
+      <button onclick="sendWA('Beli 2.000 Followers TikTok - Rp35.000')">2.000 Followers - Rp35.000</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-fire"></i> Paket FYP TikTok</h2>
+      <button onclick="sendWA('Beli 100 Like + 3.000 View - Rp2.000')">100 Like + 3.000 View - Rp2.000</button>
+      <button onclick="sendWA('Beli 1.100 Like + 25.000 View - Rp13.000')">1.100 Like + 25.000 View - Rp13.000</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-heart"></i> Like Instagram</h2>
+      <button onclick="sendWA('Beli 1.000 Like Instagram - Rp5.000')">1.000 Like - Rp5.000</button>
+      <button onclick="sendWA('Beli 2.200 Like Instagram - Rp10.000')">2.200 Like - Rp10.000</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-eye"></i> View Instagram</h2>
+      <button onclick="sendWA('Beli 5.000 View Instagram - Rp10.000')">5.000 View - Rp10.000</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-thumbs-up"></i> Like TikTok Permanen</h2>
+      <button onclick="sendWA('Beli 100 Like TikTok - Rp1.000')">100 Like - Rp1.000</button>
+      <button onclick="sendWA('Beli 500 Like TikTok - Rp5.000')">500 Like - Rp5.000</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-chart-line"></i> View TikTok</h2>
+      <button onclick="sendWA('Beli 80.000 View TikTok - Rp9.500')">80.000 View - Rp9.500</button>
+    </div>
+
+    <div class="product">
+      <h2><i class="fas fa-graduation-cap"></i> Open Murid Suntik</h2>
+      <button onclick="sendWA('Daftar Suntik: Web + Tutorial + Join Grup - Rp15.000')">Web + Tutorial + Join Grup - Rp15.000</button>
+    </div>
+
+  </section>
+
+  <footer>© 2025 Raxzy Official Market</footer>
+
+  <script>
+    const nomorAdmin = "+6285123977719"; 
+
+    function checkout(product) {
+      const ram = document.getElementById("ram-select").value;
+      const msg = `Halo min, saya mau beli ${product} RAM ${ram}.`;
+      window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    function checkoutAdminPanel() {
+      const msg = "Min, saya mau beli Admin Panel seharga 20K.";
+      window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    function checkoutResellerPanel() {
+      const msg = "Min, saya mau beli Reseller Panel seharga 15K.";
+      window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    function checkoutNokos() {
+      const country = document.getElementById("country-select").value;
+      const nomor = document.getElementById("phone-select").value;
+      const msg = `Min, saya mau beli nokos negara ${country} nomor yang ini ${nomor}.`;
+      window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    function checkoutBot() {
+      const durasi = document.getElementById("bot-duration").value;
+      const harga = {
+        "1 Minggu": "5.000",
+        "1 Bulan": "10.000",
+        "1 Tahun": "40.000",
+        "Permanen": "60.000"
+      }[durasi];
+      const msg = `Min, saya mau sewa Bot WhatsApp untuk jaga grup selama ${durasi} (Harga: ${harga})`;
+      window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    function sendWA(message) {
+      window.ope(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent('Halo Min, saya mau ' + message)}`, "_blank");
+    }
+
+    function updatePhoneNumbers() {
+      const country = document.getElementById("country-select").value;
+      const select = document.getElementById("phone-select");
+      select.innerHTML = "";
+      let numbers = {
+        filipina: ["", ""],
+        indonesia: ["", ""],
+        jepang: ["", ""],
+        amerika: ["", ""],
+        poland: ["", ""],
+        brazil: ["", ""]
+      }[country] || [];
+      numbers.forEach(num => {
+        let opt = document.createElement("option");
+        opt.value = num;
+        opt.textContent = num;
+        select.appendChild(opt);
+      });
+    }
+
+    updatePhoneNumbers();
+  </script>
+</body>
+</html>
